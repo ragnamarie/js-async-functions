@@ -29,11 +29,20 @@ spinButton.addEventListener("click", async () => {
       wheel2.spin(),
       wheel3.spin(),
     ]);
-  } catch (error) {
-    console.error(error);
-  }
 
-  getMaxCount();
+    const maxNumberOfCount = getMaxCount(values);
+    if (maxNumberOfCount === 3) {
+      result.setResult(100);
+    } else if (maxNumberOfCount === 2) {
+      result.setResult(10);
+    } else {
+      result.setResult(0);
+    }
+  } catch (error) {
+    result.setMachineChoked();
+  } finally {
+    spinButton.disabled = false;
+  }
   /**
    * Hint 1:
    * The wheel elements have a spin method that returns a promise.
